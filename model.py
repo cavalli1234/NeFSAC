@@ -74,12 +74,10 @@ class NeFSAC:
     def __init__(self,
                  model_path,
                  sample_size=5,
-                 branches_out=2,
                  sample_pool_size=10000,
                  output_size=500):
-        self.model = torch.load(model_path)
-        # self.model = NeFSAC_score_model(
-        #     sample_size, branches_out).load_state_dict(state_dict)
+        # pretrained models come as torchscript models, not checkpoints
+        self.model: NeFSAC_score_model = torch.jit.load(model_path)
         self.sample_pool_size = sample_pool_size
         self.output_size = output_size
         self.sample_size = sample_size
