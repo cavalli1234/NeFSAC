@@ -89,4 +89,4 @@ class NeFSAC:
         minimal_samples = correspondences[minimal_samples_idx]
         scores = self.model(minimal_samples).squeeze()
         best_idx = torch.topk(scores, self.output_size).indices
-        return minimal_samples[best_idx]
+        return minimal_samples[best_idx], minimal_samples_idx[best_idx]
