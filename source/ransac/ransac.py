@@ -2,7 +2,7 @@ import random
 import cv2
 import numpy as np
 import torch
-from errors import squared_sampson_distance
+from .errors import squared_sampson_distance
 
 
 def ransac_fundamental_matrix(source_points, destination_points,

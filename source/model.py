@@ -60,33 +60,15 @@ class NeFSAC_score_model(nn.Module):
         glob_x = x.max(dim=-2).values
         return glob_x
 
-    def forward(self, x):
+    def forward(self, x, with_partials=False):
         xprime = torch.cat([x[..., 2:], x[..., :2]], dim=-1)
         f1 = self.extract_features(x)
         f2 = self.extract_features(xprime)
         scores = self.mlp_fin(torch.maximum(f1, f2))
         final_score = scores.detach().log().mul(
             self.aggr_weights).sum(-1).exp()
+        # Note: this branch is only used for training
+        # so it can be removed for scripting
+        if with_partials:
+            return final_score, scores
         return final_score
-
-
-class NeFSAC:
-    def __init__(self,
-                 model_path,
-                 sample_size=5,
-                 sample_pool_size=10000,
-                 output_size=500):
-        # pretrained models come as torchscript models, not checkpoints
-        self.model: NeFSAC_score_model = torch.jit.load(model_path)
-        self.sample_pool_size = sample_pool_size
-        self.output_size = output_size
-        self.sample_size = sample_size
-
-    def produce_minimal_samples(self, correspondences: torch.Tensor):
-        num_correspondences = correspondences.shape[0]
-        assert correspondences.shape[1] == 4
-        minimal_samples_idx = torch.randint(low=0, high=num_correspondences, size=(self.sample_pool_size, self.sample_size)).to(correspondences.device)
-        minimal_samples = correspondences[minimal_samples_idx]
-        scores = self.model(minimal_samples).squeeze()
-        best_idx = torch.topk(scores, self.output_size).indices
-        return minimal_samples[best_idx], minimal_samples_idx[best_idx]
