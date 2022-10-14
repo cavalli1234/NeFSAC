@@ -17,7 +17,7 @@ It learns common motion and depth patterns of correct correspondences in a datas
 
 In our experiments, we consistently observed improvements in accuracy in pose estimation (both E and F matrix), speed-ups between 2x and 10x on a good [USAC](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=6365642) implementation, and a great generalization capability. More details are in the [paper](https://arxiv.org/pdf/2207.07872.pdf).
 
-## I want to quickly run NeFSAC
+## How to run the NeFSAC demo
 
 You can run NeFSAC on our simple pytorch-RANSAC on some sample images.
 You only need to install dependencies, and then run:
@@ -50,7 +50,7 @@ python train.py --kitti_path <KITTI_DIR>
 Further options are available to customize the training, please check them out with `python train.py --help`.
 
 
-## How to test NeFSAC into my RANSAC framework
+## How to integrate NeFSAC into another RANSAC framework
 
 Implementations and frameworks for RANSAC can vary widely, so we don't provide a ready module to use here. However, the implementation of a NeFSAC sampler from a torschscript model is straghtforward wherever torchscript is supported. A full Python implementation can be found in `source/ransac/samplers.py`.
 
