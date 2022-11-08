@@ -1,6 +1,5 @@
 import torch
 import math
-from source.ransac.math_utils import StrumPolynomialSolverBatch
 
 class FundamentalMatrixEstimator(object):
 

@@ -1,7 +1,5 @@
 import torch
-#from utils_ed import *
 
-#batched_ed = Batched_ED.apply
 class EssentialMatrixEstimator(object):
 
     def __init__(self):

@@ -141,7 +141,6 @@ class KittiSequenceDataset(torch.utils.data.IterableDataset):
                 poses = [F_to_pose(F) for F in Fs]
 
         else:
-            # poselibposes = poselib.relpose_5pt(fmt(k1), fmt(k2))
             Es, _ = cv2.findEssentialMat(k1,
                                          k2)
             if Es is None or len(Es) == 0:
