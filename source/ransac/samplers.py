@@ -16,7 +16,7 @@ class UniformSampler:
         k = data.shape[0]
         # The first sample is easy to take.
         samples = torch.randint(low=0,
-                                high=k - 1,
+                                high=k,
                                 size=(self.n_iters, 1),
                                 device=device)
         # Now extract all the rest without repetitions.
