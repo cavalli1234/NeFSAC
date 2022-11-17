@@ -54,3 +54,17 @@ Further options are available to customize the training, please check them out w
 
 Implementations and frameworks for RANSAC can vary widely, so we don't provide a ready module to use here. However, the implementation of a NeFSAC sampler from a torschscript model is straghtforward wherever torchscript is supported. A full Python implementation can be found in `source/ransac/samplers.py`.
 
+## Citation
+
+If you find this work useful in your publications, please cite:
+```
+@inproceedings{cavalli2022nefsac,
+  title={NeFSAC: neurally filtered minimal samples},
+  author={Cavalli, Luca and Pollefeys, Marc and Barath, Daniel},
+  booktitle={European Conference on Computer Vision},
+  pages={351--366},
+  year={2022},
+  organization={Springer}
+}
+```
+
